@@ -1,0 +1,55 @@
+{% extends "main.html" %}
+{% block content %}
+
+<div class="container-fluid h-100">
+  <div class="row h-100">
+    <div class="collapse" id="sidebar">
+
+      <h2>LA Metro</h2>
+      <div class="hr"></div>
+
+
+      <ul class="nav" >
+        <div class="btn-group-vertical" data-bind="foreach: lanes">
+          <div class="nav-item btn-yes" data-bind="text:title ,
+          click:visualize($data.id),
+          attr: {'id':'button-'+id ,'href': '#collapsed'+id}" data-toggle="collapse"></div>
+          <div data-bind="attr: { 'id': 'collapsed'+id }" class="collapse" >
+            <div class="" data-bind="foreach: $root.metros">
+              <!-- ko if: $parent.id === route_id -->
+              <div class="list-group-item adjustment" data-bind="text:title, click:show"></div>
+              <!-- /ko -->
+            </div>
+          </div>
+        </div>
+      </ul>
+
+    </div>
+
+
+
+    <main class= "col p-0">
+      <a href class="float-left m-3" data-target="#sidebar" data-toggle="collapse">
+        <span >
+          <img id="toggle_logo" class="ham" src="static/logo.png"></img>
+        </span>
+      </a>
+      <div class="">
+        <!-- Map Content -->
+        <div id="map">
+          <!-- Map -->
+          <p class="map_error"></p>
+        </div>
+      </div>
+    </main>
+</div>
+</div>
+<script type = 'text/javascript' src = '/static/js/map_design.js'></script>
+<script type = 'text/javascript' src = '/static/js/metro.js'></script>
+<script type = 'text/javascript' src = '/static/js/app.js'></script>
+
+<!--Load the JS API ASYNCHRONOUSLY below.-->
+<script async defer
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBxpaBw41y3rviFHaV-wqeRW9yfExqC9qM&v=3&callback=initMap">
+</script>
+{% endblock %}
